@@ -48,16 +48,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { Person } from '~/data_model.ts'
 
 export default Vue.extend({
     name: 'EditProfile',
     data() {
         return {
-            profile: {
-                alters: [],
-                lights: [],
-                notices: [],
-            },
+            profile: new Person(),
             now: Date.now(),
             date_formatter: new Intl.DateTimeFormat(),
         }
@@ -73,8 +70,8 @@ export default Vue.extend({
             get() {
                 return this.profile.notices.join('\n\n')
             },
-            set(new_value) {
-                this.profile.notices = new_value.split('\n\n')
+            set(newValue: string) {
+                this.profile.notices = newValue.split('\n\n')
             }
         }
     },

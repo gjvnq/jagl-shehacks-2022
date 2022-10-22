@@ -22,16 +22,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { Person } from '~/data_model.ts'
 
 export default Vue.extend({
     name: 'Profile',
     data() {
         return {
-            profile: {
-                alters: [],
-                lights: [],
-            },
+            profile: new Person(),
             now: Date.now(),
+            date_formatter: new Intl.DateTimeFormat(),
         }
     },
     computed: {
@@ -41,19 +40,6 @@ export default Vue.extend({
         fronting_alters() {
             return this.profile.alters.filter(alter => alter.fronting).map(alter => alter.title)
         },
-        date_formatter() {
-            return new Intl.DateTimeFormat(['pt-BR', 'en-US'], {
-                timeZone: this.profile.timezone,
-                hour12: false,
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
-                weekday: 'short',
-            })
-        }
     },
     created() {
         var self = this
@@ -66,7 +52,21 @@ export default Vue.extend({
     },
     methods: {
         async update_data() {
-            this.profile = await fetch('http://localhost:3001/profiles/'+this.profile.ulid).then(res => res.json())
+            const new_profile = await fetch('http://localhost:3001/profiles/'+this.profile.ulid).then(res => res.json())
+            if (this.profile.timezone != new_profile.timezone) {
+                this.date_formatter = new Intl.DateTimeFormat(['pt-BR', 'en-US'], {
+                    timeZone: new_profile.timezone,
+                    hour12: false,
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                    weekday: 'short',
+                })
+            }
+            this.profile = new_profile
         }
     },
     async fetch() {
