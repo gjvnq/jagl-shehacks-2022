@@ -14,20 +14,57 @@
 		"allowedViewers": [],
 		"notices": [
 			"Meus remédios estão acabando",
-			"Acordei com o pé esquerdo"
+			"Acordei com o pé esquerdo!",
+			"Acho que estou melhorando"
 		],
 		"lights": [
-			{"title": "he/him", "color": 0},
-			{"title": "she/her", "color": 2},
-			{"title": "physical pain", "color": 2},
-			{"title": "emotional pain", "color": 1},
-			{"title": "sound sensitivity", "color": 4},
-			{"title": "meltdown risk", "color": 3}
+			{
+				"title": "he/him",
+				"desc": "",
+				"color": 0
+			},
+			{
+				"title": "she/her",
+				"desc": "",
+				"color": 2
+			},
+			{
+				"title": "physical pain",
+				"desc": "",
+				"color": 2
+			},
+			{
+				"title": "emotional pain",
+				"desc": "",
+				"color": 1
+			},
+			{
+				"title": "sound sensitivity",
+				"desc": "",
+				"color": 4
+			},
+			{
+				"title": "meltdown risk",
+				"desc": "",
+				"color": 3
+			}
 		],
 		"alters": [
-			{ "title": "Marcy", "fronting": true },
-			{ "title": "Mir", "fronting": false },
-			{ "title": "Talia", "fronting": true }
+			{
+				"title": "Marcy",
+				"desc": "",
+				"fronting": true
+			},
+			{
+				"title": "Mir",
+				"desc": "",
+				"fronting": false
+			},
+			{
+				"title": "Talia",
+				"desc": "",
+				"fronting": true
+			}
 		],
 		"timezone": "America/New_York"
 	},

@@ -12,7 +12,11 @@
                 </p>
             </b-card-text>
         </b-card>
-        <Light v-for="light in profile.lights" :title="light.title" :color="light.color" :desc="light.desc"/>
+        <div style="display: block">
+            <Light v-for="light in profile.lights" :title="light.title" :color="light.color" :desc="light.desc"/>
+        </div>
+        <br/>
+        <b-button variant="outline-primary" href="?edit=true">Edit profile</b-button>
     </b-card>
 </template>
 
