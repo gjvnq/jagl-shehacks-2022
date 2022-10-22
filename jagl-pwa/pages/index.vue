@@ -1,5 +1,8 @@
 <template>
-  <Tutorial />
+  <ol>
+    <li><NuxtLink to="/users/list">List Users</NuxtLink></li>
+    <li><NuxtLink to="/profiles/me">My Profile</NuxtLink></li>
+  </ol>
 </template>
 
 <script lang="ts">

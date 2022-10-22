@@ -10,11 +10,17 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 func main() {
 	UsersModuleLoad()
 	ProfilesModuleLoad()
+
+	my_cors := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"}, // All origins
+		AllowedMethods: []string{"GET", "PUT", "POST"},
+	})
 
 	shutdown_deadline := 15 * time.Second
 	addr := "127.0.0.1:3001"
@@ -23,13 +29,13 @@ func main() {
 		// an example API handler
 		json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 	})
-	router.HandleFunc("/users/list", ListUsers)
-	router.HandleFunc("/users/new", AddUser).Methods("POST")
-	router.HandleFunc("/profiles/{ulid}", ShowProfile).Methods("GET")
-	router.HandleFunc("/profiles/{ulid}", SaveProfile).Methods("PUT")
+	router.HandleFunc("/users/list", ListUsers).Methods("GET", "OPTIONS")
+	router.HandleFunc("/users/new", AddUser).Methods("POST", "OPTIONS")
+	router.HandleFunc("/profiles/{ulid}", ShowProfile).Methods("GET", "OPTIONS")
+	router.HandleFunc("/profiles/{ulid}", SaveProfile).Methods("PUT", "OPTIONS")
 
 	srv := &http.Server{
-		Handler: router,
+		Handler: my_cors.Handler(router),
 		Addr:    addr,
 		// Good practice: enforce timeouts for servers you create!
 		WriteTimeout: 15 * time.Second,
