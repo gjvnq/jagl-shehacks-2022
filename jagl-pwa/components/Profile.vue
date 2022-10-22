@@ -32,7 +32,6 @@ export default Vue.extend({
                 lights: [],
             },
             now: Date.now(),
-            date_formatter: new Intl.DateTimeFormat(),
         }
     },
     computed: {
@@ -42,27 +41,37 @@ export default Vue.extend({
         fronting_alters() {
             return this.profile.alters.filter(alter => alter.fronting).map(alter => alter.title)
         },
+        date_formatter() {
+            return new Intl.DateTimeFormat(['pt-BR', 'en-US'], {
+                timeZone: this.profile.timezone,
+                hour12: false,
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                weekday: 'short',
+            })
+        }
     },
     created() {
         var self = this
         setInterval(function () {
             self.now = Date.now()
         }, 1000)
+        setInterval(function () {
+            self.update_data()
+        }, 2000)
+    },
+    methods: {
+        async update_data() {
+            this.profile = await fetch('http://localhost:3001/profiles/'+this.profile.ulid).then(res => res.json())
+        }
     },
     async fetch() {
-        const profile_ulid = this.$route.params.ulid;
-        this.profile = await fetch('http://localhost:3001/profiles/'+profile_ulid).then(res => res.json())
-        console.log(this.profile)
-        this.date_formatter = new Intl.DateTimeFormat([], {
-            timeZone: this.profile.timezone,
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            second: 'numeric',
-        });
-
+        this.profile.ulid = this.$route.params.ulid
+        await this.update_data()
     },
 })
 </script>

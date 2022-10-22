@@ -13,9 +13,7 @@
 		"name": "Elisa",
 		"allowedViewers": [],
 		"notices": [
-			"Meus remédios estão acabando",
-			"Acordei com o pé esquerdo!",
-			"Acho que estou melhorando"
+			"Me salva!"
 		],
 		"lights": [
 			{
@@ -31,12 +29,12 @@
 			{
 				"title": "physical pain",
 				"desc": "",
-				"color": 2
+				"color": 1
 			},
 			{
 				"title": "emotional pain",
 				"desc": "",
-				"color": 1
+				"color": 2
 			},
 			{
 				"title": "sound sensitivity",
