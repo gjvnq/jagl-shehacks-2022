@@ -8,5 +8,10 @@
 		"ulid": "01GG09GYKNSM2EF5ETKK1N5X43",
 		"name": "Elisa",
 		"canSeeProfile": []
+	},
+	{
+		"ulid": "01GG0A1SSDZ2JW38FNW62D0M2D",
+		"name": "Ana",
+		"canSeeProfile": []
 	}
 ]

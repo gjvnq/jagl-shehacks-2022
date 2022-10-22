@@ -2,11 +2,28 @@
 	"01GG097WT14PC666EV1KPRB034": {
 		"ulid": "01GG097WT14PC666EV1KPRB034",
 		"name": "Gabriela",
-		"allowedViewers": []
+		"allowedViewers": [],
+		"notices": [],
+		"lights": [],
+		"alters": [],
+		"timezone": ""
 	},
 	"01GG09GYKNSM2EF5ETKK1N5X43": {
 		"ulid": "01GG09GYKNSM2EF5ETKK1N5X43",
 		"name": "Elisa",
-		"allowedViewers": []
+		"allowedViewers": [],
+		"notices": [],
+		"lights": [],
+		"alters": [],
+		"timezone": ""
+	},
+	"01GG0A1SSDZ2JW38FNW62D0M2D": {
+		"ulid": "01GG0A1SSDZ2JW38FNW62D0M2D",
+		"name": "Ana",
+		"allowedViewers": [],
+		"notices": [],
+		"lights": [],
+		"alters": [],
+		"timezone": "America/Sao_Paulo"
 	}
 }

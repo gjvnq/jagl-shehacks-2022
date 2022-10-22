@@ -12,9 +12,13 @@ import (
 )
 
 type Profile struct {
-	Ulid           ulid.ULID   `json:"ulid"`
-	Name           string      `json:"name"`
-	AllowedViewers []ulid.ULID `json:"allowedViewers"`
+	Ulid           ulid.ULID        `json:"ulid"`
+	Name           string           `json:"name"`
+	AllowedViewers []ulid.ULID      `json:"allowedViewers"`
+	Notices        []string         `json:"notices"`
+	Lights         []IndicatorLight `json:"lights"`
+	Alters         []Alter          `json:"alters"`
+	Timezone       string           `json:"timezone"`
 }
 
 // It's the same ULID as the user's ULID
@@ -30,6 +34,10 @@ func ProfilesModuleLoad() {
 	err = json.Unmarshal(data, &Profiles)
 	if err != nil {
 		log.Fatalf("failed to load Profiles (2): %s", err.Error())
+	}
+
+	for key, profile := range Profiles {
+		Profiles[key] = fixProfile(profile)
 	}
 }
 
@@ -83,6 +91,7 @@ func SaveProfile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	new_profile.Ulid = req_ulid
+	new_profile = fixProfile(new_profile)
 	Profiles[req_ulid] = new_profile
 	ProfilesModuleSave()
 
@@ -94,8 +103,23 @@ func SaveProfile(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func fixProfile(profile Profile) Profile {
+	if profile.AllowedViewers == nil {
+		profile.AllowedViewers = make([]ulid.ULID, 0)
+	}
+	if profile.Lights == nil {
+		profile.Lights = make([]IndicatorLight, 0)
+	}
+	if profile.Notices == nil {
+		profile.Notices = make([]string, 0)
+	}
+	if profile.Alters == nil {
+		profile.Alters = make([]Alter, 0)
+	}
+	return profile
+}
+
 func newProfile() Profile {
 	profile := Profile{}
-	profile.AllowedViewers = make([]ulid.ULID, 0)
-	return profile
+	return fixProfile(profile)
 }
