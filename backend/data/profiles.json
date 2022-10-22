@@ -6,16 +6,30 @@
 		"notices": [],
 		"lights": [],
 		"alters": [],
-		"timezone": ""
+		"timezone": "America/Sao_Paulo"
 	},
 	"01GG09GYKNSM2EF5ETKK1N5X43": {
 		"ulid": "01GG09GYKNSM2EF5ETKK1N5X43",
 		"name": "Elisa",
 		"allowedViewers": [],
-		"notices": [],
-		"lights": [],
-		"alters": [],
-		"timezone": ""
+		"notices": [
+			"Meus remédios estão acabando",
+			"Acordei com o pé esquerdo"
+		],
+		"lights": [
+			{"title": "he/him", "color": 0},
+			{"title": "she/her", "color": 2},
+			{"title": "physical pain", "color": 2},
+			{"title": "emotional pain", "color": 1},
+			{"title": "sound sensitivity", "color": 4},
+			{"title": "meltdown risk", "color": 3}
+		],
+		"alters": [
+			{ "title": "Marcy", "fronting": true },
+			{ "title": "Mir", "fronting": false },
+			{ "title": "Talia", "fronting": true }
+		],
+		"timezone": "America/New_York"
 	},
 	"01GG0A1SSDZ2JW38FNW62D0M2D": {
 		"ulid": "01GG0A1SSDZ2JW38FNW62D0M2D",

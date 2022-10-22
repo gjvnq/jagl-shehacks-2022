@@ -15,6 +15,7 @@ export default Vue.extend({
 
 <style>
 :root {
+  padding: 1rem;
   max-width: 360px;
   max-height: 800px;
   margin: auto;

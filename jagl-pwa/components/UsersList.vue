@@ -1,5 +1,5 @@
 <template>
-    <b-container style="margin-top: 1rem">
+    <b-container>
         <b-row v-for="user in users" v-bind:key="user.ulid" style="margin-bottom: 1rem">
             <b-col>
                 <b-card :title="user.name">
