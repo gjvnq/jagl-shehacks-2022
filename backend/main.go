@@ -1,28 +1,58 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
 	"time"
 
 	"github.com/gorilla/mux"
 )
 
 func main() {
+	UsersModuleLoad()
+	ProfilesModuleLoad()
+
+	shutdown_deadline := 15 * time.Second
+	addr := "127.0.0.1:3001"
 	router := mux.NewRouter()
 	router.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
 		// an example API handler
 		json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 	})
+	router.HandleFunc("/users/list", ListUsers)
+	router.HandleFunc("/users/new", AddUser).Methods("POST")
+	router.HandleFunc("/profiles/{ulid}", ShowProfile).Methods("GET")
+	router.HandleFunc("/profiles/{ulid}", SaveProfile).Methods("PUT")
+
 	srv := &http.Server{
 		Handler: router,
-		Addr:    "127.0.0.1:3001",
+		Addr:    addr,
 		// Good practice: enforce timeouts for servers you create!
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 		IdleTimeout:  time.Second * 60,
 	}
 
-	log.Fatal(srv.ListenAndServe())
+	go func() {
+		log.Printf("Listening on %s", "127.0.0.1:3001")
+		if err := srv.ListenAndServe(); err != nil {
+			log.Println(err)
+		}
+	}()
+
+	stop_ch := make(chan os.Signal, 1)
+	signal.Notify(stop_ch, os.Interrupt)
+	// Wait for SIG_TERM
+	<-stop_ch
+	ctx, cancel := context.WithTimeout(context.Background(), shutdown_deadline)
+	defer cancel()
+	srv.Shutdown(ctx)
+	UsersModuleSave()
+	ProfilesModuleSave()
+	log.Print("shutting down")
+	os.Exit(0)
 }
