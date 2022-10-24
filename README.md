@@ -1,5 +1,11 @@
 # jagl-shehacks-2022
 
+Prototype developed during [SheHacks 2022](http://shehacks.xyz/).
+
+Project idea: a mental health status page.
+
+**DO NOT USE IN PRODUCTION!** I didn't implement any kind of access control or authentication. This was really just a hackathon demo.
+
 ## Frontend
 
 Development tools/dependencies:
