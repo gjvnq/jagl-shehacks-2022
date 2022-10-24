@@ -6,6 +6,8 @@ Project idea: a mental health status page.
 
 **DO NOT USE IN PRODUCTION!** I didn't implement any kind of access control or authentication. This was really just a hackathon demo.
 
+![Screenshot 1](screenshot-1.jpg)
+
 ## Frontend
 
 Development tools/dependencies:
